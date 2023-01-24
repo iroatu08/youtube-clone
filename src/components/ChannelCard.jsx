@@ -2,9 +2,16 @@ import React from "react";
 import { Box, CardContent, CardMedia, Typography } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Link } from "react-router-dom";
-import { demoProfilePicture } from "../utils/constants";
+import moment from 'moment'
+
 
 const ChannelCard = ({ channelDetail, marginTop }) => {
+
+  const dateString = channelDetail?.snippet?.publishedAt;
+  const date = moment(dateString)
+  const formattedDate = date.fromNow()
+
+
   return (
     <Box
       sx={{
@@ -31,8 +38,7 @@ const ChannelCard = ({ channelDetail, marginTop }) => {
         >
           <CardMedia
             image={
-              channelDetail?.snippet?.thumbnails?.high?.url ||
-              demoProfilePicture
+              channelDetail?.snippet?.thumbnails?.high?.url
             }
             alt={channelDetail?.snippet?.title}
             sx={{
@@ -49,6 +55,7 @@ const ChannelCard = ({ channelDetail, marginTop }) => {
               sx={{ fontSize: "14px", color: "gray", ml: "5px" }}
             />
           </Typography>
+
           {channelDetail?.statistics?.subscriberCount && (
             <Typography
               sx={{ fontSize: "15px", fontWeight: 500, color: "gray" }}
@@ -59,6 +66,15 @@ const ChannelCard = ({ channelDetail, marginTop }) => {
               Subscribers
             </Typography>
           )}
+
+          {channelDetail?.snippet?.publishedAt && (
+            <Typography
+              sx={{ fontSize: "15px", fontWeight: 500, color: "gray" }}
+            >
+           Joined  {formattedDate}
+            </Typography>
+          )}
+
         </CardContent>
       </Link>
     </Box>

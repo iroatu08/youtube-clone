@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Typography, Card, CardContent, CardMedia } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import moment from 'moment'
-import { demoThumbnailUrl, demoVideoUrl, demoVideoTitle, demoChannelUrl, demoChannelTitle, demoPublishedAt } from "../utils/constants";
+
 
 
 
@@ -15,29 +15,29 @@ const VideoCard = ({ video: { id: { videoId }, snippet } }) => {
   const formattedDate = date.fromNow()
 
   return(
-  <Card sx={{ width: { xs: '100%', sm: '358px', md: "320px", }, boxShadow: "none", borderRadius: 0 }}>
-    <Link to={videoId ? `/video/${videoId}` : `/video/cV2gBU6hKfY` }>
-      <CardMedia image={snippet?.thumbnails?.high?.url || demoThumbnailUrl} alt={snippet?.title} 
+  <Card sx={{ width: { xs: '100%', sm: '358px', md: "260px", }, boxShadow: "none", borderRadius: 0 }}>
+    <Link to={videoId && `/video/${videoId}`}>
+      <CardMedia image={snippet?.thumbnails?.high?.url } alt={snippet?.title} 
         sx={{ width: { xs: '100%', sm: '358px'}, height: 180 }} 
       />
     </Link>
     <CardContent sx={{ backgroundColor: "#1E1E1E", height: '106px' }}>
 
-      <Link to={videoId ? `/video/${videoId}` : demoVideoUrl } >
-        <Typography variant="subtitle1" fontWeight="bold" color="#FFF">
-          {snippet?.title.slice(0, 60) || demoVideoTitle.slice(0, 60)}
+      <Link to={videoId && `/video/${videoId}`} >
+        <Typography variant="subtitle1" fontWeight="bold" color="#FFF" sx={{ fontSize: "14px"}}>
+          {snippet?.title.slice(0, 60)}
         </Typography>
       </Link>
 
-      <Link to={snippet?.channelId ? `/channel/${snippet?.channelId}` : demoChannelUrl} >
-        <Typography variant="subtitle2" color="gray" fontWeight="bold">
-          {snippet?.channelTitle || demoChannelTitle}
+      <Link to={snippet?.channelId && `/channel/${snippet?.channelId}`} >
+        <Typography variant="subtitle2" color="gray" fontWeight="bold" sx={{ fontSize: "10px"}} >
+          {snippet?.channelTitle}
           <CheckCircleIcon sx={{ fontSize: "12px", color: "gray", ml: "5px" }} />
         </Typography>
       </Link>
 
       <Typography variant="subtitle2" color="gray" fontWeight="bold" sx={{ fontSize: "10px", marginTop: '10px' }}>
-          {formattedDate || demoPublishedAt}
+          {formattedDate}
         </Typography>
 
 
